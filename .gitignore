@@ -32,6 +32,10 @@ yarn-error.*
 
 # local env files
 .env*.local
+# 협업 규칙: 환경 변수·비밀 값 파일은 커밋하지 않는다 (예시 파일 .env.example 만 공유)
+.env
+.env.*
+!.env.example
 
 # typescript
 *.tsbuildinfo
