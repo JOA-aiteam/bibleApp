@@ -1,7 +1,10 @@
 # joaApp
 
+**JOY(죠이) 공동체 구성원의 성경 통독 습관을 돕는 모바일 애플리케이션**
+개발 팀 **JOA**의 첫 번째 협업 프로젝트입니다.
+
 > [!NOTE]
-> `joaApp`은 `app.json`에 설정된 **임시 프로젝트 이름**입니다. 정식 이름이 정해지면 이 제목과 `app.json`의 `name` / `slug`를 함께 변경하세요. (TODO)
+> 앱의 **공식 이름은 아직 정해지지 않았습니다.** `joaApp`은 `app.json`에 설정된 임시 이름입니다. 정식 이름이 정해지면 이 제목과 `app.json`의 `name` / `slug`를 함께 변경하세요. (TODO)
 
 ## 목차
 
@@ -27,19 +30,72 @@
 
 ## 1. 프로젝트 소개
 
+### 왜 이 프로젝트를 시작했나요?
+
+**JOA**는 구성원 모두가 **동등한 입장에서** AI와 프로그래밍을 공부하고 함께 개발하는 모임입니다.
+
+이 프로젝트는 JOA의 **첫 번째 협업 프로젝트**입니다. 앱을 완성하는 것만이 목표가 아닙니다. 아래 과정을 실제로 경험하고 함께 배우는 것도 같은 무게의 목표입니다.
+
+- GitHub를 이용한 협업 (브랜치, Pull Request, Merge)
+- 서로의 코드를 읽고 의견을 나누는 **코드 리뷰**
+- 기능 단위의 **역할 분담**
+- 기획 → 개발 → 리뷰 → 배포로 이어지는 **실무에 가까운 개발 과정**
+
+그래서 이 README의 절반 이상은 **"어떻게 함께 일하는가"** 에 대한 안내입니다. GitHub 협업이 처음이어도 이 문서를 순서대로 따라오면 참여할 수 있도록 썼습니다.
+
+### 무엇을 만드나요?
+
+**JOY(죠이) 공동체 구성원들이 성경 통독 습관을 만들고 이어갈 수 있도록 돕는 모바일 애플리케이션**을 만듭니다.
+
 | 항목 | 내용 |
 | --- | --- |
-| 프로젝트 이름 | TODO (현재 임시 이름: `joaApp`) |
-| 한 줄 소개 | TODO |
+| 개발 팀 | JOA |
+| 대상 사용자 | JOY 공동체 구성원 |
+| 핵심 목적 (확정) | 성경 읽기와 **통독 습관 형성** |
+| 앱 공식 이름 | TODO (임시 이름: `joaApp`) |
 | 개발 기간 | TODO |
-| 대상 플랫폼 | Android · iOS · Web (Expo 기본 설정 기준) |
+| 대상 플랫폼 | TODO — Expo 기본 설정은 Android · iOS · Web |
 
-**주요 기능** (TODO — 기능이 정해지면 작성)
+### 기능
 
-- [ ] TODO
-- [ ] TODO
+**확정된 것은 "성경 읽기와 통독 습관 형성"이라는 목적뿐입니다.** 이 목적을 어떤 기능으로 이룰지는 팀에서 논의해 정합니다.
 
-현재는 `create-expo-app`으로 만든 **기본 템플릿 상태**이며, Home / Explore 두 개의 탭 화면 예제가 들어 있습니다.
+아래는 **검토 후보**이며, 아직 구현하거나 확정한 기능이 아닙니다.
+
+| 검토 후보 | 상태 |
+| --- | --- |
+| 통독 계획 | 💬 논의 예정 |
+| 읽기 기록 | 💬 논의 예정 |
+| 진행률 표시 | 💬 논의 예정 |
+| 알림 | 💬 논의 예정 |
+| 공동체 기능 | 💬 논의 예정 |
+
+> 기능이 확정되면 GitHub Issue로 등록하고, 이 표를 "확정 / 개발 중 / 완료" 상태로 갱신합니다.
+
+### 개발 전 확인할 사항: 성경 본문 저작권
+
+성경 본문을 앱에 넣기 전에 반드시 확인해야 합니다. **번역본에 따라 저작권이 있으며, 무료 앱이나 공동체 내부용이라도 사용 허락이 필요할 수 있습니다.** (예: 국내 주요 번역본인 개역개정은 대한성서공회가 저작권을 관리합니다)
+
+- [ ] 사용할 **번역본** 결정 — TODO
+- [ ] 해당 번역본의 **저작권자**와 **앱 수록·표시 허락 필요 여부** 확인
+- [ ] 본문 **데이터의 출처** (API, 파일 등)와 그 데이터 자체의 **이용 약관·라이선스** 확인
+- [ ] 출처 표기 방식, 앱 내 저장(오프라인)·배포 범위에 대한 제한 확인
+- [ ] 확인 결과를 문서(Issue 또는 이 README)에 기록
+
+> [!IMPORTANT]
+> 위 항목이 확인되기 전에는 성경 본문 전체를 저장소에 Commit하지 마세요. 개발 중에는 짧은 예시 텍스트나 더미 데이터를 사용합니다.
+
+### 현재 상태
+
+`create-expo-app`으로 만든 **기본 템플릿 상태**이며, Home / Explore 두 개의 탭 화면 예제만 들어 있습니다. 백엔드(Supabase)는 사용하기로 정했지만 **아직 프로젝트에 연결하지 않았습니다.**
+
+| 결정 사항 | 상태 |
+| --- | --- |
+| 프레임워크: Expo + React Native + TypeScript | ✅ 확정, 적용됨 |
+| 백엔드: Supabase | ✅ 확정, 미연결 (TODO) |
+| 앱 공식 이름 | TODO |
+| 세부 기능 | 💬 논의 예정 |
+| 성경 번역본 및 본문 출처 | TODO (저작권 확인 필요) |
 
 ---
 
@@ -59,10 +115,12 @@
 | 웹 지원 | react-native-web, react-dom | `web.output: "server"` |
 | 기타 Expo 모듈 | expo-image, expo-symbols, expo-glass-effect, `@expo/ui` 등 | 템플릿 기본 포함 |
 | 패키지 매니저 | npm | `package-lock.json` 사용 |
+| 백엔드 | [Supabase](https://supabase.com/docs) | ✅ 사용 확정 · ⏳ **아직 미설치** (패키지·설정 없음) |
 | 협업 도구 | Git, GitHub, VS Code | — |
 
 > [!NOTE]
-> 상태 관리, 서버/API, 데이터베이스, 테스트 도구는 **아직 정해지지 않았습니다.** 도입하면 이 표에 추가하세요. (TODO)
+> - **Supabase 도입은 별도 PR**(예: `feature/supabase-setup`)로 진행합니다. 클라이언트 패키지는 `npx expo install`로 추가하고, 연결 방법은 [Expo – Using Supabase](https://docs.expo.dev/guides/using-supabase/) 가이드를 참고합니다. Supabase 프로젝트를 누가 소유·관리할지, 팀원에게 Dashboard 권한을 어떻게 줄지도 함께 정합니다. (TODO)
+> - 상태 관리, 테스트 도구는 **아직 정해지지 않았습니다.** 도입하면 이 표에 추가하세요. (TODO)
 
 ---
 
@@ -285,10 +343,12 @@ git remote -v                # 원격 저장소 연결 여부
 | `git remote -v`에 `origin` 이 보임 | [경우 4](#경우-4-github-원격-저장소가-이미-연결된-프로젝트) |
 
 > [!NOTE]
-> **이 저장소의 현재 상태 (2026-11-06 확인)**
-> - Git 초기화됨, 현재 브랜치 **`master`**, Commit 1개 (`b192c01 Initial commit`)
-> - 원격 저장소 **연결 안 됨**, `dev` 브랜치 없음
-> - → **경우 3** 에 해당합니다. 브랜치 이름을 `master` → `main`으로 바꾼 뒤 진행합니다.
+> **이 저장소는 초기 설정이 끝났습니다 (2026-11-06 확인).** 팀원은 이 장을 건너뛰고 [8. 팀원 온보딩](#8-팀원-온보딩)으로 가세요.
+> - 원격 저장소: [`JOA-aiteam/bibleApp`](https://github.com/JOA-aiteam/bibleApp) (Public, JOA-aiteam Organization 소유)
+> - 브랜치: `main`, `dev` 생성 및 업로드 완료
+> - GitHub 기본 브랜치: **`dev`**
+>
+> 아래 내용은 설정 과정의 기록이자, 다른 프로젝트에서 같은 설정을 할 때 참고하는 용도입니다.
 
 > [!WARNING]
 > Git은 **Commit이 하나도 없으면 브랜치가 실제로 존재하지 않습니다.** 이 상태에서 `git branch dev`를 실행하면 `fatal: not a valid object name: 'main'` 같은 오류가 납니다. **반드시 최초 Commit을 만든 다음** 브랜치를 만드세요.
@@ -415,7 +475,7 @@ git branch -vv               # main → origin/main, dev → origin/dev 연결 �
 **GitHub 웹 → 저장소 → Settings → Collaborators (Organization이면 Collaborators and teams) → Add people**
 → 팀원의 GitHub 사용자명 또는 이메일 입력 → 초대 전송.
 
-- 팀원은 이메일 또는 `https://github.com/<OWNER>/<REPO>/invitations` 에서 **수락**해야 합니다. 초대는 7일 후 만료됩니다.
+- 팀원은 이메일 또는 <https://github.com/JOA-aiteam/bibleApp/invitations> 에서 **수락**해야 합니다. (Organization 멤버로 초대받았다면 <https://github.com/orgs/JOA-aiteam/invitation> 에서 수락) 초대는 7일 후 만료됩니다.
 - 개인 계정 저장소의 Collaborator는 코드 Push·PR Merge가 가능하지만 **저장소 설정은 소유자만** 변경할 수 있습니다.
 
 이후 [13. GitHub 저장소 권장 설정](#13-github-저장소-권장-설정)으로 브랜치 보호를 설정하세요.
@@ -476,8 +536,8 @@ git config --global --list
 New-Item -ItemType Directory -Force C:\dev
 Set-Location C:\dev
 
-git clone https://github.com/<OWNER>/<REPO>.git
-Set-Location <REPO>
+git clone https://github.com/JOA-aiteam/bibleApp.git
+Set-Location bibleApp
 ```
 
 ### 4단계. VS Code에서 프로젝트 열기
@@ -952,7 +1012,8 @@ git stash pop                # 보관한 변경 사항 복원
 | Private 저장소 + 개인 **GitHub Pro** | ✅ 사용 가능 |
 | Private 저장소 + Organization **Team / Enterprise** | ✅ 사용 가능 (Organization Free는 ❌) |
 
-- 설정은 저장소 **소유자 / Admin** 만 가능합니다. 개인 계정 저장소의 Collaborator는 설정을 바꿀 수 없습니다.
+- ✅ **이 저장소(`JOA-aiteam/bibleApp`)는 Public이므로 브랜치 보호를 사용할 수 있습니다.**
+- 설정은 저장소 **소유자 / Admin** 만 가능합니다. 쓰기(Write) 권한만 있는 팀원은 설정을 바꿀 수 없습니다.
 - 학생이라면 [GitHub Education](https://education.github.com/)을 통해 Pro 혜택을 받을 수 있는지 확인해 보세요.
 - 요금제·기능 정책은 바뀔 수 있으니 최신 내용은 [GitHub 문서 – About protected branches](https://docs.github.com/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)를 확인하세요.
 - **보호 기능을 쓸 수 없다면**: 기술적으로 막을 수 없으므로 [14. 협업 규칙](#14-협업-규칙)을 팀 전원이 지키는 것으로 대신합니다. 특히 `main`, `dev`에 직접 Push하지 않도록 주의하세요.
@@ -960,6 +1021,8 @@ git stash pop                # 보관한 변경 사항 복원
 ---
 
 ## 14. 협업 규칙
+
+JOA는 구성원 모두가 **동등한 입장**에서 배우고 개발하는 모임입니다. 그래서 규칙은 모두에게 똑같이 적용됩니다. 저장소 소유자도 직접 Push하지 않고 PR과 리뷰를 거칩니다. 리뷰는 경력과 관계없이 누구나 하고 누구나 받습니다. 모르는 것을 묻는 것도 협업의 일부입니다.
 
 **반드시 지킬 규칙**
 
@@ -970,7 +1033,7 @@ git stash pop                # 보관한 변경 사항 복원
 5. PR에는 **구현 내용과 테스트 결과**를 쓰고, **다른 팀원 1명 이상의 승인** 후 Merge.
 6. feature/fix → dev는 **Squash and merge**, dev → main은 **Create a merge commit**.
 7. Merge 후 **브랜치 삭제**, 다음 작업은 새 브랜치에서.
-8. `.env`, API Key, 서명 키, 서비스 계정 키 등 **민감 정보 커밋 금지**.
+8. `.env`, API Key, 서명 키, 서비스 계정 키, **Supabase service_role(secret) key** 등 **민감 정보 커밋 금지**. ([상세](./CONTRIBUTING.md#민감-정보-관리))
 9. 패키지 추가는 **`npx expo install`** 로, 팀과 상의 후 별도 PR로.
 10. `git reset --hard`, `git push --force`는 **사용하지 않음**. 막히면 혼자 해결하지 말고 공유.
 
@@ -989,11 +1052,13 @@ git stash pop                # 보관한 변경 사항 복원
 
 | 이름 | GitHub | 역할 | 담당 기능 | 주요 PR |
 | --- | --- | --- | --- | --- |
-| TODO | [@l1lsang](https://github.com/l1lsang) | 저장소 관리 · TODO | TODO | TODO |
+| TODO | [@l1lsang](https://github.com/l1lsang) | 저장소 설정 관리 · TODO | TODO | TODO |
 | TODO | @TODO | TODO | TODO | TODO |
 | TODO | @TODO | TODO | TODO | TODO |
 
 > 각자 본인 행을 직접 수정하는 PR(`docs: 팀원 정보 추가`)을 올리면, 그것이 첫 PR 연습이 됩니다.
+>
+> "저장소 설정 관리"는 GitHub 설정 권한 때문에 생기는 **관리 역할**일 뿐 팀 내 직급이 아닙니다. 기능 담당과 리뷰는 모든 팀원이 동등하게 맡습니다.
 
 ### 포트폴리오 활용
 
@@ -1008,9 +1073,9 @@ git stash pop                # 보관한 변경 사항 복원
 
 **저장소 소유자와 실제 기여자**
 
-- 저장소 URL(`github.com/<OWNER>/<REPO>`)은 만든 사람 계정 아래에 있지만, **Commit·PR·리뷰 기록은 각 작성자의 계정**에 남습니다. 소유자가 아니어도 기여 그래프와 프로필에 반영되며, 프로필의 **Pinned** 에 내가 기여한 저장소를 고정할 수 있습니다.
+- 저장소 URL(`github.com/JOA-aiteam/bibleApp`)은 Organization 아래에 있지만, **Commit·PR·리뷰 기록은 각 작성자의 계정**에 남습니다. 소유자가 아니어도 기여 그래프와 프로필에 반영되며, 프로필의 **Pinned** 에 내가 기여한 저장소를 고정할 수 있습니다.
 - Private 저장소의 기여는 다른 사람에게 자세히 보이지 않습니다. 프로필 **Contribution settings → Private contributions** 를 켜면 개수만 표시됩니다. 포트폴리오로 쓰려면 Public 전환을 고려하세요.
-- **GitHub Organization (선택 사항)**: 팀 이름으로 Organization(무료)을 만들고 그 아래에 저장소를 두면, 특정 개인 소유가 아닌 **팀 공동 저장소**가 됩니다. 소유자를 여러 명 둘 수 있고, 팀 단위 권한 관리가 가능합니다. 개인 계정 저장소도 나중에 Settings → General → **Transfer ownership** 으로 Organization에 옮길 수 있습니다. (Organization Free에서 Private 저장소는 브랜치 보호가 적용되지 않는 점은 동일)
+- **GitHub Organization**: 이 저장소는 **JOA-aiteam Organization** 소유이므로 특정 개인이 아닌 **팀 공동 저장소**입니다. Organization 소유자(Owner)를 여러 명 둘 수 있고, 팀 단위 권한 관리가 가능합니다. 저장소가 Public이라 무료 요금제에서도 브랜치 보호가 적용됩니다. (Private으로 바꾸면 Organization Free에서는 적용되지 않음)
 
 ---
 

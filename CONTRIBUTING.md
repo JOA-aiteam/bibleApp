@@ -89,6 +89,10 @@ PR을 만들면 [PR 템플릿](./.github/pull_request_template.md)이 자동으�
 - 서명 키(`*.jks`, `*.p8`, `*.p12`, `*.key`, `*.pem`, `*.mobileprovision`)도 이미 `.gitignore`에 등록되어 있습니다.
 - 스토어 업로드용 **서비스 계정 JSON 키**, Firebase 설정 파일 등을 추가하게 되면, Commit 전에 `.gitignore`에 먼저 등록합니다.
 - Expo에서 `EXPO_PUBLIC_` 으로 시작하는 환경 변수는 **앱 번들에 포함되어 사용자에게 노출**됩니다. 진짜 비밀 값(서버 API Secret 등)은 앱에 넣지 않습니다.
+- **Supabase 키** (백엔드로 Supabase 사용 확정, 아직 미연결)
+  - 앱에 넣을 수 있는 키: 프로젝트 URL과 **anon / publishable key** (공개를 전제로 한 키). 단, 이 키로 데이터가 보호되려면 테이블마다 **RLS(Row Level Security)** 정책이 반드시 켜져 있어야 합니다.
+  - **절대 앱·저장소에 넣으면 안 되는 것**: **service_role / secret key**, 데이터베이스 비밀번호, Supabase 개인 액세스 토큰. 이 값들은 RLS를 무시하고 모든 데이터에 접근할 수 있습니다.
+  - 실제 값은 각자의 `.env`에만 두고, 변수 이름만 `.env.example`로 공유합니다. 키 전달은 Git이 아닌 팀 내부 채널로 합니다.
 - 실수로 비밀 값을 Push했다면:
   1. **즉시 해당 키를 폐기하고 재발급**합니다. (Commit을 지워도 이력·포크·캐시에 남을 수 있음)
   2. 팀에 알립니다.
