@@ -54,7 +54,7 @@
 | 핵심 목적 (확정) | 성경 읽기와 **통독 습관 형성** |
 | 앱 공식 이름 | TODO (임시 이름: `joaApp`) |
 | 개발 기간 | TODO |
-| 대상 플랫폼 | TODO — Expo 기본 설정은 Android · iOS · Web |
+| 대상 플랫폼 | iOS · Android (웹은 지원하지 않음) |
 
 ### 기능
 
@@ -87,12 +87,15 @@
 
 ### 현재 상태
 
-`create-expo-app`으로 만든 **기본 템플릿 상태**이며, Home / Explore 두 개의 탭 화면 예제만 들어 있습니다. 백엔드(Supabase)는 사용하기로 정했지만 **아직 프로젝트에 연결하지 않았습니다.**
+앱 골격 단계입니다. 하단 탭 5개(홈, 성경, 통독표, 내 기록, 내 정보), 성경 본문 화면, 로그인 화면의 라우트가 있고, 성경 본문은 **더미 데이터**(`MockBibleRepository`)로 표시합니다. Supabase 클라이언트는 설치되어 있지만 **아직 화면에 연결하지 않았습니다.**
 
 | 결정 사항 | 상태 |
 | --- | --- |
 | 프레임워크: Expo + React Native + TypeScript | ✅ 확정, 적용됨 |
-| 백엔드: Supabase | ✅ 확정, 미연결 (TODO) |
+| 대상 플랫폼: iOS · Android | ✅ 확정, 웹 코드·설정 제거됨 |
+| 백엔드: Supabase | ✅ 확정, 클라이언트 설치됨, 화면 미연결 (TODO) |
+| 로그인 방식: 카카오, 이메일 | ✅ 확정, 화면 골격만 있음 (TODO) |
+| 날짜 기준: 한국 표준시(KST), 통독 일차는 개인 시작일 기준 | ✅ 확정, `src/domain/date.ts` |
 | 앱 공식 이름 | TODO |
 | 세부 기능 | 💬 논의 예정 |
 | 성경 번역본 및 본문 출처 | TODO (저작권 확인 필요) |
@@ -112,14 +115,14 @@
 | 라우팅 | [Expo Router](https://docs.expo.dev/router/introduction/) | 파일 기반 라우팅, Typed Routes 사용 (`experiments.typedRoutes`) |
 | 컴파일러 | React Compiler | `app.json`의 `experiments.reactCompiler: true` |
 | 애니메이션 | react-native-reanimated, react-native-worklets | 4.7.1 / 0.13.0 |
-| 웹 지원 | react-native-web, react-dom | `web.output: "server"` |
 | 기타 Expo 모듈 | expo-image, expo-symbols, expo-glass-effect, `@expo/ui` 등 | 템플릿 기본 포함 |
 | 패키지 매니저 | npm | `package-lock.json` 사용 |
-| 백엔드 | [Supabase](https://supabase.com/docs) | ✅ 사용 확정 · ⏳ **아직 미설치** (패키지·설정 없음) |
+| 백엔드 | [Supabase](https://supabase.com/docs) | `@supabase/supabase-js`, 클라이언트 `src/lib/supabase.ts` (화면 미연결) |
+| 로컬 저장 | expo-sqlite | 설치됨, 아직 사용하지 않음 |
 | 협업 도구 | Git, GitHub, VS Code | — |
 
 > [!NOTE]
-> - **Supabase 도입은 별도 PR**(예: `feature/supabase-setup`)로 진행합니다. 클라이언트 패키지는 `npx expo install`로 추가하고, 연결 방법은 [Expo – Using Supabase](https://docs.expo.dev/guides/using-supabase/) 가이드를 참고합니다. Supabase 프로젝트를 누가 소유·관리할지, 팀원에게 Dashboard 권한을 어떻게 줄지도 함께 정합니다. (TODO)
+> - Supabase 클라이언트는 설치되어 있습니다(`src/lib/supabase.ts`). 환경 변수가 없으면 import하는 순간 오류가 나므로, `.env.example`을 복사해 `.env.local`을 만든 뒤 화면에서 사용하세요. Supabase 프로젝트를 누가 소유·관리할지, 팀원에게 Dashboard 권한을 어떻게 줄지는 정해야 합니다. (TODO)
 > - 상태 관리, 테스트 도구는 **아직 정해지지 않았습니다.** 도입하면 이 표에 추가하세요. (TODO)
 
 ---
@@ -155,7 +158,6 @@ npx expo start
 | Android 휴대폰 | Expo Go 앱으로 QR 코드 스캔 |
 | iPhone | 기본 카메라 앱으로 QR 코드 스캔 → Expo Go로 열기 |
 | Android 에뮬레이터 | 터미널에서 `a` 입력 (Android Studio 에뮬레이터 필요) |
-| Web 브라우저 | 터미널에서 `w` 입력 |
 | iOS 시뮬레이터 | macOS에서만 가능 (`i` 입력) — Windows 팀원은 실제 iPhone + Expo Go 사용 |
 
 `package.json`에 정의된 스크립트:
@@ -165,18 +167,15 @@ npx expo start
 | `npm start` | `expo start` |
 | `npm run android` | `expo start --android` |
 | `npm run ios` | `expo start --ios` |
-| `npm run web` | `expo start --web` |
 | `npm run lint` | `expo lint` (아래 참고) |
-| `npm run reset-project` | 예제 코드를 `example/`로 옮기고 빈 `src/app` 생성 (아래 주의 참고) |
-| `npx tsc --noEmit` | TypeScript 타입 검사 (스크립트 미등록, 직접 실행) |
+| `npm run typecheck` | `tsc --noEmit` TypeScript 타입 검사 |
 
 > [!WARNING]
 > - **패키지 추가는 `npx expo install <패키지명>`** 으로 합니다. `npm install <패키지명>`은 SDK와 호환되지 않는 버전을 설치할 수 있습니다. 패키지 추가는 팀과 먼저 상의하고, 별도 PR로 올리세요.
 > - 휴대폰과 PC가 **같은 Wi-Fi** 에 있어야 QR 실행이 됩니다. 안 되면 `npx expo start --tunnel`을 시도하세요.
 > - Expo Go는 자체 포함된 네이티브 모듈만 실행할 수 있고, **스토어의 Expo Go가 프로젝트 SDK(58)를 지원해야** 합니다. 지원하지 않거나 네이티브 라이브러리를 추가했다면 [development build](https://docs.expo.dev/develop/development-builds/introduction/)가 필요합니다.
 > - `npm run lint`는 ESLint가 아직 설정되지 않아 **처음 실행 시 ESLint 설치·설정 파일 생성**을 진행합니다. 이것은 프로젝트 설정 변경이므로 한 사람이 `chore/eslint-setup` 같은 브랜치에서 진행하고 PR로 올리세요. (TODO)
-> - `npx tsc --noEmit`은 현재(2026-11-06) **템플릿 코드에서 오류 3개**가 발생합니다: `animated-icon.module.css`·`@/global.css` 타입 선언 없음, `app-tabs.web.tsx`의 `ref` 타입 불일치. CSS 관련 오류는 `npx expo start` 실행 시 생성되는 `expo-env.d.ts`가 없어서일 수 있습니다. 정리는 별도 PR로 진행하세요. (TODO)
-> - `npm run reset-project`는 `src/`, `scripts/`, 예제 이미지를 옮깁니다. 그런데 `example/` 폴더는 `.gitignore`에 등록되어 있어 **옮겨진 예제 코드는 Git에 올라가지 않습니다.** 팀에서 합의한 뒤 **한 명만** 별도 PR로 실행하세요.
+> - `npm run typecheck`는 오류 0개가 기준입니다. 링크 경로(Typed Routes) 타입은 `npx expo start`를 한 번 실행해야 `.expo/types`에 생성됩니다.
 
 ### Windows에서 자주 겪는 문제
 
@@ -200,20 +199,35 @@ joaApp/
 │   └── settings.json              # 저장 시 자동 수정·import 정리
 ├── assets/
 │   ├── expo.icon/                 # iOS 앱 아이콘
-│   └── images/                    # 앱 아이콘, 스플래시, 탭 아이콘, 예제 이미지
-├── scripts/
-│   └── reset-project.js           # npm run reset-project 스크립트
+│   └── images/                    # 앱 아이콘, 스플래시 이미지
 ├── src/
 │   ├── app/                       # ⭐ Expo Router 라우트 (파일 1개 = 화면 1개)
-│   │   ├── _layout.tsx            # 루트 레이아웃: 테마, 스플래시, 탭 구성
-│   │   ├── index.tsx              # Home 탭 화면
-│   │   └── explore.tsx            # Explore 탭 화면
-│   ├── components/                # 재사용 컴포넌트 (*.web.tsx = 웹 전용 구현)
-│   │   └── ui/
+│   │   ├── _layout.tsx            # 루트 Stack: 탭, 본문, 로그인
+│   │   ├── (tabs)/                # 하단 탭 5개 (NativeTabs)
+│   │   │   ├── _layout.tsx
+│   │   │   ├── index.tsx          # 홈
+│   │   │   ├── bible.tsx          # 성경 (66권 목록)
+│   │   │   ├── plan.tsx           # 통독표
+│   │   │   ├── records.tsx        # 내 기록
+│   │   │   └── my.tsx             # 내 정보
+│   │   ├── read/[bookId]/[chapter].tsx  # 성경 본문 (예: /read/GEN/1)
+│   │   └── login.tsx              # 로그인 (카카오, 이메일)
+│   ├── components/                # 재사용 UI 컴포넌트
 │   ├── constants/
 │   │   └── theme.ts               # 색상 등 테마 상수
-│   ├── hooks/                     # 커스텀 훅 (color scheme, theme)
-│   └── global.css
+│   ├── domain/                    # 타입과 순수 함수 (UI·저장소와 무관)
+│   │   ├── bible.ts               # 책·장·절 타입, 구절 키
+│   │   ├── reading.ts             # 진행, 형광펜, 통독 일정, 마지막 위치 타입
+│   │   └── date.ts                # KST 날짜 유틸
+│   ├── data/                      # 데이터 접근 계층
+│   │   ├── index.ts               # 사용할 Repository 구현체 지정 (교체 지점)
+│   │   ├── bible-books.ts         # 66권 이름·순서·장 수
+│   │   ├── repositories/          # Repository 인터페이스
+│   │   └── mock/                  # 더미 구현 (테스트용 본문)
+│   ├── features/                  # 기능별 hook (UI ↔ Repository 연결)
+│   ├── hooks/                     # 공통 hook (color scheme, theme)
+│   └── lib/
+│       └── supabase.ts            # Supabase 클라이언트
 ├── AGENTS.md                      # AI 코딩 도우미용 프로젝트 지침
 ├── CONTRIBUTING.md                # 상세 협업 규칙
 ├── LICENSE
